@@ -20,4 +20,6 @@ class Tasks(Base):
     name = Column(Integer, primary_key=True)
     description = Column(Integer, primary_key=True)
     completion_status = Column(Boolean, primary_key=True)
-    owner_id = Column(String, ForeignKey("users.id"))
+    owner_id = Column(String, ForeignKey("users.email"))
+
+    owner = relationship("User", back_populates="email")

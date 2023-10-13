@@ -1,0 +1,8 @@
+Tools and Technologies: Python, FastAPI, SQLAlchemy, Docker, SQLite
+
+Project Solution Approach: The first step in this project is to set up a new FastAPI project using your preferred
+Python environment. Next, you will create a Task model using SQLAlchemy and define the columns for the task ID,
+task name, task description, and completion status. Create a new SQLAlchemy session and connect to the SQLite database.
+You will then implement authentication and authorization mechanisms such as OAuth2 or JWT to secure the API. Test the API
+using tools such as Postman or FastAPI TestClient. Containerize the application using Docker and deploy it to a cloud
+platform such as AWS.
