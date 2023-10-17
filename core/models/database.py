@@ -1,4 +1,4 @@
-from ..db import Base
+from db import Base
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 
@@ -10,7 +10,7 @@ class User(Base):
     user_name = Column(String)
     password = Column(String)
 
-    tasks = relationship("Tasks", back_populates="id")
+    tasks = relationship("Tasks", back_populates="owner")
 
 
 class Tasks(Base):
@@ -22,4 +22,4 @@ class Tasks(Base):
     completion_status = Column(Boolean, primary_key=True)
     owner_id = Column(String, ForeignKey("users.email"))
 
-    owner = relationship("User", back_populates="email")
+    owner = relationship("User", back_populates="tasks")

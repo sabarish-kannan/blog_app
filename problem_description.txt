@@ -6,3 +6,16 @@ task name, task description, and completion status. Create a new SQLAlchemy sess
 You will then implement authentication and authorization mechanisms such as OAuth2 or JWT to secure the API. Test the API
 using tools such as Postman or FastAPI TestClient. Containerize the application using Docker and deploy it to a cloud
 platform such as AWS.
+
+
+Possible EndPoints:
+1. Add a task
+2. Delete a task
+3. Mark a task as completed
+4. update a task
+5. get all tasks
+    User
+1. user sign up
+2. user login
+3. Update user name
+4. Forgot Password
