@@ -33,11 +33,11 @@ class Authenticate:
             expire = datetime.utcnow() + timedelta(
                 minutes=self.access_token_expire_minutes
             )
-            data_to_encode.update({"exp": expire})
-            jwt_token = jwt.encode(
-                data_to_encode, key=self.secret_key, algorithm=self.algorithm
-            )
-            return jwt_token
+        data_to_encode.update({"exp": expire})
+        jwt_token = jwt.encode(
+            data_to_encode, key=self.secret_key, algorithm=self.algorithm
+        )
+        return jwt_token
 
         def decode_jwt_token(self, token: str):
             try:
