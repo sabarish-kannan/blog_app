@@ -1,12 +1,10 @@
 from fastapi import APIRouter, Depends
 from core.schemas.schema import UserCreate, UserToSend, UserLogin
-from db import Session, engine
-from typing import Annotated
+from db import Session
 from authentication import Authenticate
 from core.models import models
 
 
-models.Base.metadata.create_all(bind=engine)
 router = APIRouter(prefix="/users", tags=["user"])
 
 
