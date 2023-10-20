@@ -39,15 +39,22 @@ class Authenticate:
         )
         return jwt_token
 
-        def decode_jwt_token(self, token: str):
-            try:
-                payload = jwt.decode(
-                    token, key=self.secret_key, algorithms=self.algorithm
-                )
-                return payload
-            except JWTError:
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail="Invalid access token",
-                    headers={"WWW-Authenticate": "Bearer"},
-                )
+    def decode_jwt_token(self, token: str):
+        try:
+            payload = jwt.decode(
+                token, key=self.secret_key, algorithms=self.algorithm
+            )
+            return payload
+        except JWTError:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid access token",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+
+
+def get_user_email_from_token(authorization: str):
+    authorization = authorization[7:]
+    auth = Authenticate()
+    user_data = auth.decode_jwt_token(token)
+    return user_data["email"]

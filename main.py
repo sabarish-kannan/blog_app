@@ -6,6 +6,7 @@ from db import engine
 
 app = FastAPI()
 app.include_router(user.router)
+app.include_router(task.router)
 models.Base.metadata.create_all(bind=engine)
 
 if __name__ == "__main__":

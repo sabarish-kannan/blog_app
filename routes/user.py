@@ -41,7 +41,7 @@ def login_user(user_data: UserLogin, db: Session = Depends(get_db)):
         token = auth.create_jwt_token(
             {"email": user.email, "user_name": user.user_name}, 30
         )
-        return {"msg": "logged successfully", "jwt_token": token}
+        return {"msg": "logged in successfully", "jwt_token": token}
     else:
         return {
             "msg": "Invalid credentials",
