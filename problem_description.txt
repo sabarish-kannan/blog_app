@@ -9,18 +9,22 @@ platform such as AWS.
 
 
 Possible EndPoints:
-1. Add a task
+1. Add a task --val
 2. Delete a task
 3. Mark a task as completed
-4. update a task
+4. update a task --val
 5. get all tasks
+
     User
-1. user sign up
+1. user sign up --val
 2. user login
-3. Update user name
-4. Forgot Password
+3. Update user name --val
+4. Forgot Password --val
 
 
+
+To be done:
+1.validation to everything
 
 
 

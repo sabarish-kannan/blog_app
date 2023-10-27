@@ -2,7 +2,11 @@ from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from typing import Optional
 from jose import JWTError, jwt
-from fastapi import HTTPException, status
+from fastapi import HTTPException, status, Depends, Request
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+
+
+security = HTTPBearer()
 
 
 class Authenticate:
@@ -53,8 +57,11 @@ class Authenticate:
             )
 
 
-def get_user_email_from_token(authorization: str):
-    authorization = authorization[7:]
+def get_user_data(
+    request: Request,
+    authorization: HTTPAuthorizationCredentials = Depends(security),
+):
+    token = authorization.credentials
     auth = Authenticate()
     user_data = auth.decode_jwt_token(token)
-    return user_data["email"]
+    request.state.user_data = user_data

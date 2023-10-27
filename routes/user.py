@@ -22,7 +22,7 @@ def create_user(user_data: UserCreate, db: Session = Depends(get_db)):
     db_user = models.User(
         email=user_data.email,
         user_name=user_data.user_name,
-        password=user_data.password,
+        password=hashed_password,
     )
     db.add(db_user)
     db.commit()
@@ -38,16 +38,15 @@ def login_user(user_data: UserLogin, db: Session = Depends(get_db)):
 
     if user:
         auth = Authenticate()
-        token = auth.create_jwt_token(
-            {"email": user.email, "user_name": user.user_name}, 30
-        )
-        return {"msg": "logged in successfully", "jwt_token": token}
+        if auth.verify_password(user_data.password, user.password):
+            token = auth.create_jwt_token(
+                {"email": user.email, "user_name": user.user_name}, 30
+            )
+            return {"msg": "logged in successfully", "jwt_token": token}
+        return {
+            "msg": "Invalid credentials",
+        }
     else:
         return {
             "msg": "Invalid credentials",
         }
-
-
-@router.get("/", response_model=list[UserToSend])
-def get_all_users(db: Session = Depends(get_db)):
-    return db.query(models.User).all()

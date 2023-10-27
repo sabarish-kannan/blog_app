@@ -18,12 +18,12 @@ class UserToSend(UserBase):
     user_name: str
 
 
-class TasksBase(BaseModel):
+class TaskBase(BaseModel):
     title: str
     description: str | None = None
-    completion_status: bool = False
 
 
-class CreateTask(TasksBase):
+class TaskCreate(TaskBase):
     id: str
     owner_id: str
+    completion_status: bool = False

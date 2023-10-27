@@ -17,7 +17,7 @@ class Tasks(Base):
     __tablename__ = "tasks"
 
     id = Column(Text, primary_key=True)
-    name = Column(Text, primary_key=True)
+    title = Column(Text, primary_key=True)
     description = Column(Text, primary_key=True)
     completion_status = Column(Boolean, primary_key=True)
     owner_id = Column(Text, ForeignKey("users.email"))
