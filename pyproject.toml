@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "blog-app"
+name = "todo-app"
 version = "0.1.0"
 description = ""
 authors = ["coder-sabarish <studysabarish@gmail.com>"]
 readme = "README.md"
-packages = [{include = "blog_app"}]
+packages = [{include = "todo_app"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
