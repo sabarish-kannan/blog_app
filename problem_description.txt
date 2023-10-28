@@ -1,82 +1,34 @@
-Tools and Technologies: Python, FastAPI, SQLAlchemy, Docker, SQLite
+Tools and Technologies: Python, FastAPI, SQLAlchemy, SQLite
 
 Project Solution Approach: The first step in this project is to set up a new FastAPI project using your preferred
 Python environment. Next, you will create a Task model using SQLAlchemy and define the columns for the task ID,
 task name, task description, and completion status. Create a new SQLAlchemy session and connect to the SQLite database.
 You will then implement authentication and authorization mechanisms such as OAuth2 or JWT to secure the API. Test the API
-using tools such as Postman or FastAPI TestClient. Containerize the application using Docker and deploy it to a cloud
-platform such as AWS.
+using tools such as Postman or FastAPI TestClient.
+
 
 
 Possible EndPoints:
-1. Add a task --val
+
+    Tasks
+1. Add a task
 2. Delete a task
 3. Mark a task as completed
-4. update a task --val
+4. update a task
 5. get all tasks
 
     User
-1. user sign up --val
+1. user sign up
 2. user login
-3. Update user name --val
-4. Forgot Password --val
-
-
-
-To be done:
-1.validation to everything
+3. Update user profile
+4. Forgot password  --pending
+5. delete account
 
 
 
 
-
-
-from fastapi import APIRouter, Depends, Header, Security
-from fastapi.security.api_key import APIKeyHeader
-from core.schemas.schema import TasksBase, CreateTask
-from db import Session
-from authentication import Authenticate
-from core.models import models
-from datetime import datetime
-from typing import Annotated
-
-
-router = APIRouter(prefix="/tasks", tags=["tasks"])
-token_key = APIKeyHeader(name="Authorization")
-
-
-def get_db():
-    try:
-        db = Session()
-        yield db
-    finally:
-        db.close()
-
-
-# @router.post("/")
-# def add_task(
-#     header: Header(), task_data: TasksBase, db: Session = Depends(get_db)
-# ):
-#     token = header["Bearer"][7:]
-#     auth = Authenticate()
-#     user_data = auth.decode_jwt_token(token)
-#     task_to_add = task_data.dict()
-#     task_to_add["id"] = f"{task_data.title} {datetime.now()}"
-#     task_to_add["owner_id"] = user_data.email
-#     task_to_add = CreateTask(task_to_add)
-#     db.add(task_to_add)
-#     db.commit()
-#     db.refresh(task_to_add)
-#     return {
-#         "msg": f"task '{task_data.title}' added successfully",
-#     }
-
-
-@router.get("/")
-def get_my_tasks(
-    token: str = Security(token_key), db: Session = Depends(get_db)
-):
-    token = token[7:]
-    auth = Authenticate()
-    user_data = auth.decode_jwt_token(token)
-    return db.query(models.Tasks).filter_by(owner_id=user_data["email"]).all()
+password:
+starts with the beginning of the line.
+contains at least one lowercase letter, one uppercase letter, one digit, and one special character.
+consists of only alphanumeric characters and special characters.
+has a minimum length of 8 characters

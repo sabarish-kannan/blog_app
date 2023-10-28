@@ -1,9 +1,18 @@
+"""Database Models."""
+
+
 from db import Base
-from sqlalchemy import Column, Integer, Boolean, ForeignKey, Text
+from sqlalchemy import Column, Boolean, ForeignKey, Text
 from sqlalchemy.orm import relationship
 
 
 class User(Base):
+    """User table model.
+
+    Args:
+        Base: Base class for creating schemas.
+    """
+
     __tablename__ = "users"
 
     email = Column(Text, primary_key=True)
@@ -14,6 +23,12 @@ class User(Base):
 
 
 class Tasks(Base):
+    """Tasks table model.
+
+    Args:
+        Base: Base class for creating schemas.
+    """
+
     __tablename__ = "tasks"
 
     id = Column(Text, primary_key=True)
